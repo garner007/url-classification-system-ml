@@ -17,7 +17,7 @@ Suspicious_TLD = ['zip', 'cricket', 'link', 'work', 'party', 'gq', 'kim', 'count
 
 
 # Function to calculate the Total Number of Dots in a URL
-def Total_Dots(link):git
+def Total_Dots(link):
     dot = '.'
     count = 0
     for i in link:
