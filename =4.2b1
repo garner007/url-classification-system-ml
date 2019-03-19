@@ -1,9 +1,0 @@
-Collecting pyyaml
-  Downloading https://files.pythonhosted.org/packages/9f/2c/9417b5c774792634834e730932745bc09a7d36754ca00acf1ccd1ac2594d/PyYAML-5.1.tar.gz (274kB)
-Building wheels for collected packages: pyyaml
-  Running setup.py bdist_wheel for pyyaml: started
-  Running setup.py bdist_wheel for pyyaml: finished with status 'done'
-  Stored in directory: /home/garner007/.cache/pip/wheels/ad/56/bc/1522f864feb2a358ea6f1a92b4798d69ac783a28e80567a18b
-Successfully built pyyaml
-Installing collected packages: pyyaml
-Successfully installed pyyaml-5.1

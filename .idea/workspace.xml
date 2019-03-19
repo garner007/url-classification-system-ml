@@ -3,7 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="45593dc5-bc7e-4a11-9670-50d69478ba54" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Vector_creator.py" beforeDir="false" afterPath="$PROJECT_DIR$/Vector_creator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/=2.3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/=4.2b1" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -40,11 +41,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Vector_creator.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="160">
-              <caret line="19" column="21" selection-start-line="19" selection-start-column="21" selection-end-line="19" selection-end-column="21" />
-              <folding>
-                <element signature="e#0#9#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="60">
+              <caret line="4" column="59" lean-forward="true" selection-start-line="4" selection-start-column="1" selection-end-line="4" selection-end-column="59" />
             </state>
           </provider>
         </entry>
@@ -63,7 +61,7 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="445" />
+    <option name="x" value="67" />
     <option name="y" value="27" />
     <option name="width" value="1759" />
     <option name="height" value="861" />
@@ -115,16 +113,15 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1552936355550</updated>
-      <workItem from="1552936358320" duration="2720000" />
+      <workItem from="1552936358320" duration="3900000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2720000" />
+    <option name="totallyTimeSpent" value="3900000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1849" height="902" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Favorites" side_tool="true" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23738214" />
@@ -183,13 +180,13 @@
     <entry file="file://$PROJECT_DIR$/requirements.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/=2.3">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/Vector_creator.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="19" column="21" selection-start-line="19" selection-start-column="21" selection-end-line="19" selection-end-column="21" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="60">
+          <caret line="4" column="59" lean-forward="true" selection-start-line="4" selection-start-column="1" selection-end-line="4" selection-end-column="59" />
         </state>
       </provider>
     </entry>
