@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from scipy import interp
-from sklearn.preprocessing import LabelBinarizer
+from sklearn.preprocessing import LabelEncoder
 from sklearn.naive_bayes import GaussianNB
 from sklearn.model_selection import KFold
 from sklearn.metrics import confusion_matrix
@@ -11,6 +11,7 @@ from sklearn.metrics import roc_curve
 from sklearn.metrics import auc
 from sklearn.feature_selection import SelectKBest
 from sklearn.feature_selection import chi2
+from names import names
 
 
 import pickle
@@ -19,33 +20,17 @@ naive_saved_file = 'naivePredictor.sav'
 selected_features = 'bestFeatures.csv'
 feature_mask = 'featuresMask.csv'
 
-names = ['url', 'length_of_url', 'number_of_dots', 'suspicious_words', 'number_of_hyphens_in_domain',
-         'length_of_directory', 'number_subdirectories_in_url', 'length_of_domain', 'words_in_domain', 'path_tokens',
-         'url_contains_ip', 'has_alexa_rank', 'use_https', 'country_code', 'age', 'words',  'entropy', 'special_chars',
-         'length_of_largest_domain_token', 'average_length_of_domain_tokens','length_of_largest_path_token',
-         'average_length_of_path_tokens', 'suspicious_tld_name', 'file_name_present', 'len_of_filename',
-         'num_dot_in_filename', 'num_delims_in_filename', 'args_present', 'length_of_arguments',
-         'number_of_argument_variables', 'length_of_largest_variable', 'maximum_number_of_delims_in_arguments', 'class']
-
 data_csv = pd.read_csv('cleaned_data.csv', delimiter='|', names=names, header=0)
-
-# print(train_data_csv.head(5))
 
 naive = GaussianNB()
 
-print(data_csv.shape)
-
-print(data_csv.describe())
-
 
 # convert class to binary (0, 1) from benign, malicious
-lb = LabelBinarizer()
-data_csv['class'] = lb.fit_transform(data_csv['class'].values)
-print(data_csv.groupby(['class']).size())
+le = LabelEncoder()
+data_csv['class'] = le.fit_transform(data_csv['class'].values)
+
 
 data_csv.drop(columns=['url'], axis=1, inplace=True)
-print(data_csv.shape)
-
 
 array = data_csv.values
 

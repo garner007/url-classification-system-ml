@@ -8,6 +8,8 @@ import datetime
 from datetime import date
 import pprint
 
+# portions of this code come from https://github.com/Anmol-Sharma/URL_CLASSIFICATION_SYSTEM
+
 # List of Suspicious Words Present in URL
 Suspicious_Words = ['secure', 'account', 'update', 'banking', 'login', 'click', 'confirm', 'password', 'verify',
                     'signin', 'ebayisapi', 'lucky', 'bonus', 'pdf', '.exe', '/../', 'base64']
