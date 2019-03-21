@@ -6,6 +6,7 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.naive_bayes import GaussianNB
 from sklearn.model_selection import KFold
 from sklearn.metrics import confusion_matrix
+from mlxtend.plotting import plot_confusion_matrix
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import roc_curve
 from sklearn.metrics import auc
@@ -122,6 +123,10 @@ plt.xlabel('False Positive Rate')
 plt.ylabel('True Positive Rate')
 plt.title('Receiver operating Curve GaussianBayes URL Prediction')
 plt.legend(loc="lower right")
+plt.show()
+
+# Plot the Confusion Matrix
+fig, ax = plot_confusion_matrix(conf_mat=matrix_sum, figsize=(10, 5))
 plt.show()
 
 
