@@ -1,3 +1,17 @@
+"""
+The module takes the cleaned data, and begins to prepare the model building process.
+It run KBEST feature selection on the dataset, to descide on the best set of features to use.
+It will run Kbest n-times, depeinding on how many features on available.
+The results  of those runs will be stored in a dict, which will then evaluated to decide which k-number of features
+provided the best result.
+The k-feature for the best result will be writting out to a file which will build a final model from it, as well as
+10-fold cross validation to provide statistics
+
+The output will also be used in the predictor model for individual URL results.
+
+An additional file will be written out which holds the labels of the features that were selected for use.
+"""
+
 from sklearn.naive_bayes import GaussianNB
 from sklearn.feature_selection import SelectKBest
 from sklearn.feature_selection import chi2

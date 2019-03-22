@@ -1,3 +1,9 @@
+"""
+Module load in the CSV of cleaned data, and used the mask of features for findBestK to train the NaiveBayes
+Gaussian model.  This module also run Cross-Validation on the model and data, to produce ROC curve
+Confusion Matrix as well as the accuracy score.
+"""
+
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -47,7 +53,7 @@ mask = np.genfromtxt(feature_mask, delimiter=',', dtype=None)
 X = array[:, mask]
 
 # set up for 10 fold cross validation
-splits = 2
+splits = 10
 kf = KFold(n_splits=splits)
 kf.get_n_splits(X, Y)
 
@@ -72,8 +78,8 @@ for train_index, test_index in kf.split(X, Y):
     summation += accuracy_score(Y_test, prediction)
 
     # Compute ROC curve
-    probas_ = naive.fit(X[train_index], Y[train_index]).predict_proba(X[test_index])
-    fpr, tpr, thresholds = roc_curve(Y[test_index], probas_[:, 1])
+    probability = naive.fit(X[train_index], Y[train_index]).predict_proba(X[test_index])
+    fpr, tpr, thresholds = roc_curve(Y[test_index], probability[:, 1])
     tprs.append(interp(mean_fpr, fpr, tpr))
     tprs[-1][0] = 0.0
     roc_auc = auc(fpr, tpr)

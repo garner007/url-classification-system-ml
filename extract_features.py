@@ -1,3 +1,8 @@
+"""
+This module creates the vectorized file of features from the inputs of the benign and malicious websites.
+
+"""
+
 import Vector_creator as Vc
 import random
 import csv
@@ -24,12 +29,14 @@ with open(malicious) as malicious, open(benign) as benign, open(combined, 'w') a
     # appending all read URLs in a single Python list
     data = []
 
+    # read in the benign URLs
     for row_ben in ben_reader:
         ben_count += 1
         url = row_ben[0]
         label = 'benign'
         data.append(url + '|' + label)
 
+    # read in the malicious URLs
     for row_mal in mal_reader:
         mal_count += 1
         url = row_mal[0]
@@ -42,8 +49,10 @@ with open(malicious) as malicious, open(benign) as benign, open(combined, 'w') a
     temp = []
     count = 0
 
+    # randomly shuffle the data between the benign and malicious URLs
     random.shuffle(data)
 
+    # connect to the Alexa top 1m database
     cwd = os.getcwd()
     db_location = join(cwd, db_name)
     try:
@@ -52,6 +61,7 @@ with open(malicious) as malicious, open(benign) as benign, open(combined, 'w') a
         print(e)
         print("Error connecting to database")
 
+    # process the data to create the vectors.
     for line in data:
         record = line.split("|")
         url = record[0]
