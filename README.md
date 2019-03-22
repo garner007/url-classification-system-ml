@@ -2,6 +2,8 @@
 This is a code base for my capstone Data Mining and Cybersecurity class.  It is designed to make predictions on whether 
 or not a URL is benign or malicious, without accessing the web page directly.  
 
+Code developed using Ubuntu 18.04 and Python 3.6
+
 ## Description of Modules
 ### loadAlexaDB.py 
     - downloads the top 1m webpages from Alexa and loads the csv to a sqlite database
