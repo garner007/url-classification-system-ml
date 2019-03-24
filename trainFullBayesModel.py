@@ -1,5 +1,5 @@
 """
-Module load in the CSV of cleaned data, and used the mask of features for findBestK to train the NaiveBayes
+Module load in the CSV of cleaned data, and uses the mask of features for findBestK to train the NaiveBayes
 Gaussian model.  This module also run Cross-Validation on the model and data, to produce ROC curve
 Confusion Matrix as well as the accuracy score.
 """

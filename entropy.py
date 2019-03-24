@@ -1,11 +1,11 @@
-import math
+"""
+ Class Entropy to calculate URL entropy.
 
-# Class Entropy to calculate URL entropy.
-# Entropy is often described as a measure of randomness. Malicious URLs
-# will typically have a higher entropy and randomness.
-# Entropy is calculated using Shannon Entropy -
-# https://en.wiktionary.org/wiki/Shannon_entropy
-# http://pythonfiddle.com/shannon-entropy-calculation/
+ code gathered from:
+ http://pythonfiddle.com/shannon-entropy-calculation/
+"""
+
+import math
 
 
 class Entropy:

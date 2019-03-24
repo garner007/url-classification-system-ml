@@ -1,3 +1,11 @@
+"""
+ portions of this code come from :
+ https://github.com/Anmol-Sharma/URL_CLASSIFICATION_SYSTEM
+ https://github.com/P3t3rp4rk3r/MLURL-Machine-Learning-Malicious-URL-Detection/blob/master/mlurl.py
+
+"""
+
+
 import re
 from ipwhois import IPWhois
 import socket
@@ -6,9 +14,6 @@ from sklearn.feature_extraction.text import CountVectorizer
 from entropy import Entropy
 import datetime
 from datetime import date
-import pprint
-
-# portions of this code come from https://github.com/Anmol-Sharma/URL_CLASSIFICATION_SYSTEM
 
 # List of Suspicious Words Present in URL
 Suspicious_Words = ['secure', 'account', 'update', 'banking', 'login', 'click', 'confirm', 'password', 'verify',
@@ -138,6 +143,7 @@ def get_ip_info(dom):
 # Here URLs are described by word occurrences while completely
 # ignoring the relative position information of the words in
 # the document.
+# taken  from https://github.com/P3t3rp4rk3r/MLURL-Machine-Learning-Malicious-URL-Detection/blob/master/mlurl.py
 def bag_of_words(url):
     vectorizer = CountVectorizer()
     content = re.split('\W+', url)
@@ -151,6 +157,8 @@ def bag_of_words(url):
 # special characters.
 # In this method, a counter is used to count the number of
 # special characters that are found within a URL.
+# initial code taken from
+# https://github.com/P3t3rp4rk3r/MLURL-Machine-Learning-Malicious-URL-Detection/blob/master/mlurl.py
 def special_chars(url):
     counter = 0
     for c in url:

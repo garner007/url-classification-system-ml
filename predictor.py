@@ -6,7 +6,7 @@ Asks for url; creates vector from URL and makes the prediction.
 
 
 import pickle
-import Vector_creator as Vc
+import vector_creator as Vc
 from countries import countries
 import numpy as np
 import sqlite3

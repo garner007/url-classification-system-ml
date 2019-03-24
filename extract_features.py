@@ -1,9 +1,10 @@
 """
 This module creates the vectorized file of features from the inputs of the benign and malicious websites.
 
+
 """
 
-import Vector_creator as Vc
+import vector_creator as vc
 import random
 import csv
 import sqlite3
@@ -66,7 +67,7 @@ with open(malicious) as malicious, open(benign) as benign, open(combined, 'w') a
         record = line.split("|")
         url = record[0]
         label = record[1]
-        vec = Vc.Construct_Vector(url, conn)
+        vec = vc.Construct_Vector(url, conn)
         output = url + '|' + '|'.join(str(e) for e in vec) + '|' + label
         combined.write(output + "\n")
         count += 1
