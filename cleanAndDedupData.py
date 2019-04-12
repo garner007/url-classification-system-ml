@@ -1,6 +1,16 @@
+"""
+This module reads in the output from the vectorizor; does any clean-up on the data that is needed, and then drops
+duplicate records, using Pandas.
+
+
+"""
+
 from countries import countries
+import pandas as pd
+from names import names
 combined = 'combined_url.csv'
 cleaned_data = 'cleaned_data.csv'
+deduped = 'cleaned_deduped.csv'
 dropped_data = 'invalid.csv'
 
 bm = ('benign', 'malicious')
@@ -49,3 +59,21 @@ with open(combined, 'r') as combined, open(cleaned_data, 'w') as cleaned, open(d
 
 Number_records_dropped = read_count - write_count
 print(Number_records_dropped, " records dropped due to bad fields")
+
+# now that we have cleaned the data, lets get rid of any duplicates
+cleaned_data = pd.read_csv('cleaned_data.csv', delimiter='|', header=0, names=names)
+
+original_records = cleaned_data.shape[0]
+print('Number of original records remaining: ' + str(original_records))
+
+duplicates_removed = cleaned_data.drop_duplicates()
+
+after_dupes_removed = duplicates_removed.shape[0]
+
+print('Number of records after duplicated removed: ' + str(after_dupes_removed))
+duplicates_removed.to_csv(deduped, sep='|', index=None)
+
+number_removed = original_records - after_dupes_removed
+
+print('Number of duplicate records removed: ' + str(number_removed))
+
