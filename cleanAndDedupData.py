@@ -77,3 +77,8 @@ number_removed = original_records - after_dupes_removed
 
 print('Number of duplicate records removed: ' + str(number_removed))
 
+print("Distribution of data")
+print('Original Cleaned data')
+print(cleaned_data.groupby(['class']).size())
+print('Deduped Cleaned data')
+print(duplicates_removed.groupby(['class']).size())
