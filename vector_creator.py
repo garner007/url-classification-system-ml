@@ -157,14 +157,18 @@ def bag_of_words(url):
 # special characters.
 # In this method, a counter is used to count the number of
 # special characters that are found within a URL.
+# if the counter is > 0, set return to show they were found
 # initial code taken from
 # https://github.com/P3t3rp4rk3r/MLURL-Machine-Learning-Malicious-URL-Detection/blob/master/mlurl.py
 def special_chars(url):
-    counter = 0
+    ctr = 0
     for c in url:
-        if c in ['*', ';', '%', '!', '&', ':']:
-            counter += 1
-    return counter
+        if c in ['*', ';', '%', '!', '&', ':', '@', '-']:
+            ctr += 1
+    if ctr > 0:
+        return 1
+    else:
+        return 0
 
 
 # Defined Vector which will contain the Values for Different Parameters associated with a URL

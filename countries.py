@@ -105,6 +105,7 @@ countries = {
     "British Indian Ocean Territory": 104,
     "Iraq": 105,
     "Islamic Republic of Iran": 106,
+    "Iran": 106,
     "Iceland": 107,
     "Italy": 108,
     "Jamaica": 109,
@@ -183,6 +184,7 @@ countries = {
     "Réunion": 182,
     "Romania": 183,
     "Russian Federation": 184,
+    "Russia" :184,
     "Rwanda": 185,
     "Saudi Arabia": 186,
     "Solomon Islands": 187,
@@ -219,6 +221,7 @@ countries = {
     "Trinidad & Tobago": 218,
     "Tuvalu": 219,
     "Taiwan Province of China": 220,
+    "Taiwan": 220,
     "Tanzania United Republic of": 221,
     "Ukraine": 222,
     "Uganda": 223,
@@ -231,7 +234,7 @@ countries = {
     "Venezuela": 230,
     "British Virgin Islands": 231,
     "United States Virgin Islands": 232,
-    "Viet Nam": 233,
+    "Vietnam": 233,
     "Vanuatu": 234,
     "Wallis & Futuna Islands": 235,
     "Samoa": 236,
@@ -243,6 +246,9 @@ countries = {
     "Zambia": 242,
     "Zaire": 243,
     "Zimbabwe": 244,
-    "Unknown": 245
+    "Serbia": 245,
+    "Macedonia": 246,
+    "Reunion": 247,
+    "Unknown": 248
 }
 
