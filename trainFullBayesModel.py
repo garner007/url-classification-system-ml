@@ -30,6 +30,9 @@ confusion_matrix_file = 'confusion_matrix_plot.png'
 
 data_csv = pd.read_csv('cleaned_deduped.csv', delimiter='|', names=names, header=0)
 
+# test the classifier with the mislabeled data points removed
+# data_csv = pd.read_csv('dropped.csv', delimiter='|', names=names, header=0)
+
 naive = GaussianNB()
 
 # convert class to binary (0, 1) from benign, malicious
@@ -80,8 +83,8 @@ with open(classifierErrorsFP, 'w', ) as error_fileFP, open(classifierErrorsFN, '
             open(selected_features, 'r') as selected:
     reader = csv.reader(selected)
     for row in reader:
-        error_fileFP.write('url' + ',' + ','.join((map(str, row))) + '\n')
-        error_fileFN.write('url' + ',' + ','.join((map(str, row))) + '\n')
+        error_fileFP.write('url' + '|' + '|'.join((map(str, row))) + '\n')
+        error_fileFN.write('url' + '|' + '|'.join((map(str, row))) + '\n')
     for train_index, test_index in kf.split(X, Y):
         X_train, X_test = X[train_index], X[test_index]
         Y_train, Y_test, url_data = Y[train_index], Y[test_index], U[test_index]
@@ -96,10 +99,10 @@ with open(classifierErrorsFP, 'w', ) as error_fileFP, open(classifierErrorsFN, '
                 uidx = test_index[n]
                 if prediction[n] == 1:
                     # these are the FP - benign urls flagged as malicious
-                    error_fileFP.write(str(U[uidx, 0]) + ',' + ','.join(map(str, X[uidx])) + '\n')
+                    error_fileFP.write(str(U[uidx, 0]) + '|' + '|'.join(map(str, X[uidx])) + '\n')
                 else:
                     # these are the FN - malicious urls flagged as benign
-                    error_fileFN.write(str(U[uidx, 0]) + ',' + ','.join(map(str, X[uidx])) + '\n')
+                    error_fileFN.write(str(U[uidx, 0]) + '|' + '|'.join(map(str, X[uidx])) + '\n')
             n += 1
 
         matrix_sum = matrix_sum + matrix
@@ -139,6 +142,7 @@ false_positive_rate = format(FP / (TN + FP) * 100, '.2f')
 false_negative_rate = format(FN / (FN + TP) * 100, '.2f')
 precision = format(TP / (TP + FP) * 100, '.2f')
 
+
 # average accuracy of the model
 average = (summation / splits) * 100
 average = format(average, '.2f')
@@ -151,6 +155,7 @@ print("True Negative Rate: " + true_negative_rate + '%')
 print("False Positive Rate: " + false_positive_rate + '%')
 print("False Negative Rate: " + false_negative_rate + '%')
 print("Precision of model: " + precision)
+
 
 
 # Calculate and print ROC curve

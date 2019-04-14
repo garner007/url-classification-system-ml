@@ -5,7 +5,6 @@ This module runs some statistics on the dataset to show some descriptive informa
 
 import pandas as pd
 from names import names
-from sklearn.preprocessing import LabelEncoder
 
 benign_describe = 'benign_describe.csv'
 malicious_describe = 'malicious_describe.csv'

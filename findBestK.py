@@ -32,6 +32,9 @@ kbest_accuracy = 'kbest_accuracy.txt'
 
 data_csv = pd.read_csv('cleaned_deduped.csv', delimiter='|', names=names, header=0)
 
+# test the classifier with the mislabeled data points removed
+# data_csv = pd.read_csv('dropped.csv', delimiter='|', names=names, header=0)
+
 # drop the url column , as it's not helpful for modeling
 data_csv.drop(columns=['url'], axis=1, inplace=True)
 
