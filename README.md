@@ -11,9 +11,10 @@ Code developed using Ubuntu 18.04 and Python 3.6
     - reads in the url files (benign.csv and merged_malware.csv)
     - processes these records through **vector_creator.py** to vectorize the url
     - vector is written out to **combined_url.csv**
-### cleanData.py
+### cleanAndDedupData.py.py
     - reads the **combined_url.csv** data and checks for data issues that were found causing issues , and 
         corrects them or drops those records
+    - removed duplicate URLs from the file
     - creates **cleaned_data.csv** for use in further processing
 ### findBestK.py
     - read in the **cleaned_data.csv** , and used SelectKBest feature selection, running n-times as determined by 
@@ -24,9 +25,26 @@ Code developed using Ubuntu 18.04 and Python 3.6
 ###  trainFullBayesModel.py
     - using the feature mask from **findBestK.py** , cross validation is run again to produce average statistics
     - ROC curve, Confusion Matrix and accuracy scores are produces
+    - writes out files for false negative and false positive classifier errors
     - model is saved to a pickle file, to be used again in the **predictor.py** 
+###  trainFullBayesModelAllFeatures.py
+    - runs the same as the trainFullBayesModel with the exception that it uses all of the features on the file
+    - also does not write out classifier errors
 ###  predictor.py
     - Asks for URL for testing; runs the url through **vector_creator.py** 
     - returned vector is run throught he naive model and prediciton is produced. 
-  
+### dataAnalysis.py
+    - creates statistical informaiton from the benign and malicious groups of deduped data and writes out to a CSV
+    - counts the number of records on the original cleaned file and the dedupped file for comparison. 
+### errorAnalysis.py
+    - uses the false positive and false negative classifier errors to perform analysis
+    - creates counts of the number of records from each of the files that fit criteria for the features
+        to help determine where errors may be coming from 
+    - using analysis of those errors, addition csv files are created to further analyze the largest of the error for 
+        trends 
+    - after analysis was done, records are removed for further testing and analysis. 
+### featureAnalysis.py
+    - creates counts of the number of records from the deduped file that fit criteria for the features
+        to allow for analysis
+
  

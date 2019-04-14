@@ -112,7 +112,7 @@ print('count of URLS with length_of_largest_variable between 1 and 11 inclusive:
       + str(length_of_largest_variable.shape[0]))
 
 """
-Write out a files of URLS for selected features that could have large impage on False P / False N 
+Write out a files of URLS for selected features that could have large impact on False P / False N 
 """
 
 FP_alexa = FP_errors[FP_errors['has_alexa_rank'] == 0]
