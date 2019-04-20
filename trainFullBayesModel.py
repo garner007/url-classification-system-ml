@@ -28,7 +28,7 @@ classifierErrorsFN = 'classifierErrorsFN.csv'
 roc_file = 'ROC_plot.png'
 confusion_matrix_file = 'confusion_matrix_plot.png'
 
-data_csv = pd.read_csv('cleaned_deduped.csv', delimiter='|', names=names, header=0)
+data_csv = pd.read_csv('dropped.csv', delimiter='|', names=names, header=0)
 
 # test the classifier with the mislabeled data points removed
 data_csv = pd.read_csv('dropped.csv', delimiter='|', names=names, header=0)

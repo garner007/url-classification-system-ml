@@ -1,55 +1,48 @@
-"""
-Module loads in the CSV of cleaned data, and uses the mask of features from findBestK to train the NaiveBayes
-Gaussian model.  This module also runs Cross-Validation on the model and data, to produce ROC curve
-Confusion Matrix as well as the accuracy score.
-"""
-
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from scipy import interp
-from sklearn.preprocessing import LabelEncoder
-from sklearn.naive_bayes import GaussianNB
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.preprocessing import LabelBinarizer
 from sklearn.model_selection import KFold
 from sklearn.metrics import confusion_matrix
 from mlxtend.plotting import plot_confusion_matrix
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import roc_curve
 from sklearn.metrics import auc
+import pickle
 from names import names
 
+forest_saved_file = 'forestPredictor.sav'
+feature_mask = 'featuresMask.csv'
+roc_file = 'ROC_plot_RForest.png'
+confusion_matrix_file = 'confusion_matrix_plot_RForest.png'
 
-import pickle
+data_csv = pd.read_csv('dropped.csv', delimiter='|', names=names, header=0)
 
-naive_saved_file = 'naivePredictor.sav'
-roc_file = 'ROC_plot_All_Features.png'
-confusion_matrix_file = 'confusion_matrix_plot_All_Features.png'
+# print(train_data_csv.head(5))
 
-data_csv = pd.read_csv('cleaned_deduped.csv', delimiter='|', names=names, header=0)
-
-naive = GaussianNB()
+forest = RandomForestClassifier()
 
 # convert class to binary (0, 1) from benign, malicious
-le = LabelEncoder()
-data_csv['class'] = le.fit_transform(data_csv['class'].values)
+lb = LabelBinarizer()
+data_csv['class'] = lb.fit_transform(data_csv['class'].values)
+print(data_csv.groupby(['class']).size())
 
-original_CSV = data_csv.copy()
-
+# drop the URL column
 data_csv.drop(columns=['url'], axis=1, inplace=True)
-
 array = data_csv.values
 
 # load Y with the classes, making sure they are of int type
 Y = array[:, -1]
 Y = Y.astype(int)
 
-# drop the class so we can use the data frame for the SelectKBest
+# drop the Class column
 data_csv.drop(columns=['class'], axis=1, inplace=True)
 array = data_csv.values
 
-
 # load X with the features
-X = array[:, 0: -2]
+X = array[:, 0: -1]
 
 # set up for 10 fold cross validation
 splits = 10
@@ -66,20 +59,19 @@ aucs = []
 mean_fpr = np.linspace(0, 1, 100)
 i = 0
 
-
 for train_index, test_index in kf.split(X, Y):
     X_train, X_test = X[train_index], X[test_index]
     Y_train, Y_test = Y[train_index], Y[test_index]
-
-    naive.fit(X_train, Y_train)
-    prediction = naive.predict(X_test)
+    forest.fit(X_train, Y_train)
+    prediction = forest.predict(X_test)
+    # print(classification_report(Y_test, prediction))
     matrix = confusion_matrix(Y_test, prediction)
     matrix_sum = matrix_sum + matrix
     summation += accuracy_score(Y_test, prediction)
 
     # Compute ROC curve
-    probability = naive.fit(X[train_index], Y[train_index]).predict_proba(X[test_index])
-    fpr, tpr, thresholds = roc_curve(Y[test_index], probability[:, 1])
+    probas_ = forest.fit(X[train_index], Y[train_index]).predict_proba(X[test_index])
+    fpr, tpr, thresholds = roc_curve(Y[test_index], probas_[:, 1])
     tprs.append(interp(mean_fpr, fpr, tpr))
     tprs[-1][0] = 0.0
     roc_auc = auc(fpr, tpr)
@@ -88,7 +80,6 @@ for train_index, test_index in kf.split(X, Y):
              label='ROC fold %d (AUC = %0.2f)' % (i, roc_auc))
 
     i += 1
-
 
 print("Confusion Matrix")
 print(matrix_sum)
@@ -101,8 +92,8 @@ TN = matrix_sum[1][1]
 
 print("True Positive --- " + str(TP))
 print("False Positive ---" + str(FP))
-print("False Negative ---" + str(FN))
 print("True Negative --- " + str(TN))
+print("False Negative ---" + str(FN))
 
 overall_accuracy = format((TP + TN) / (TP + TN + FP + FN) * 100, '.2f')
 true_positive_rate = format(TP / (TP + FN) * 100, '.2f')
@@ -110,6 +101,7 @@ true_negative_rate = format(TN / (TN + FP) * 100, '.2f')
 false_positive_rate = format(FP / (TN + FP) * 100, '.2f')
 false_negative_rate = format(FN / (FN + TP) * 100, '.2f')
 precision = format(TP / (TP + FP) * 100, '.2f')
+
 
 # average accuracy of the model
 average = (summation / splits) * 100
@@ -144,21 +136,17 @@ plt.xlim([-0.05, 1.05])
 plt.ylim([-0.05, 1.05])
 plt.xlabel('False Positive Rate')
 plt.ylabel('True Positive Rate')
-plt.title('Receiver Operating Curve GaussianBayes URL Prediction \n with accuracy of ' + average + ' percent')
+plt.title('Receiver Operating Curve Random Forest URL Prediction \n with accuracy of ' + average + ' percent')
 plt.legend(loc="lower right")
 plt.savefig(roc_file)
 
 # Plot the Confusion Matrix
-plt.title('Confusion Matrix GaussianBayes URL Prediction \n with accuracy of ' + average + ' percent')
+plt.title('Confusion Matrix Random Forest URL Prediction \n with accuracy of ' + average + ' percent')
 fig, ax = plot_confusion_matrix(conf_mat=matrix_sum, figsize=(10, 5))
 plt.savefig(confusion_matrix_file)
 
 
-# train a model on the full data
-naive.fit(X, Y)
-
 # dump the model for later use
-pickle.dump(naive, open(naive_saved_file, 'wb'))
 
-
+pickle.dump(forest, open(forest_saved_file, 'wb'))
 
