@@ -30,6 +30,12 @@ Code developed using Ubuntu 18.04 and Python 3.6
 ###  trainFullBayesModelAllFeatures.py
     - runs the same as the trainFullBayesModel with the exception that it uses all of the features on the file
     - also does not write out classifier errors
+###  DecisionForest.py
+    - creates a classifier using the cleaned, deduped data using the Decision Tree model
+    - ROC curve, Confusion Matrix and accuracy scores are produces
+###  randomForest.py
+    - creates a classifier using the cleaned, deduped data using the Random Forest model
+    - ROC curve, Confusion Matrix and accuracy scores are produces
 ###  predictor.py
     - Asks for URL for testing; runs the url through **vector_creator.py** 
     - returned vector is run throught he naive model and prediciton is produced. 
