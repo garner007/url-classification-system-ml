@@ -2,7 +2,7 @@ apturl==0.5.2
 asn1crypto==0.24.0
 beautifulsoup4==4.7.1
 Brlapi==0.6.6
-certifi==2018.11.29
+certifi==2023.7.22
 cffi==1.12.2
 chardet==3.0.4
 command-not-found==0.3
